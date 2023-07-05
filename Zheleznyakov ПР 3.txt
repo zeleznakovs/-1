@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+// Функція для підрахунку кількості чисел із р розрядів
+int countNumbers(int r) {
+    // Якщо р = 1, можна сформувати лише два числа - 5 і 9
+    if (r == 1) {
+        return 2;
+    }
+
+    // Ініціалізуємо лічильник
+    int count = 0;
+
+    // Ініціалізуємо змінні для трьох попередніх цифр
+    int prevDigit1 = 5;
+    int prevDigit2 = 9;
+    int prevDigit3 = 0;
+
+    // Обчислюємо кількість чисел із р розрядів
+    for (int i = 3; i <= r; i++) {
+        // Поточна кількість чисел дорівнює сумі попередніх трьох цифр
+        count = prevDigit1 + prevDigit2 + prevDigit3;
+
+        // Оновлюємо значення попередніх трьох цифр
+        prevDigit3 = prevDigit2;
+        prevDigit2 = prevDigit1;
+        prevDigit1 = count;
+    }
+
+    return count;
+}
+
+int main() {
+    int r;
+    printf("Введіть розрядність чисел: ");
+    scanf("%d", &r);
+
+    int result = countNumbers(r);
+
+    printf("Кількість чисел із %d розрядів: %d\n", r, result);
+
+    return 0;
+}
